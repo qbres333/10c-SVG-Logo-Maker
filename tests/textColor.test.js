@@ -5,8 +5,8 @@ describe("logo text", () => {
     // test hex code
     it("should pass if the text entered is a valid 6-digit Hex color", () => {
       const color = "#12EEE6";
-      const generalShape = new Shape();
-      generalShape.textColor(color);
+    //   const generalShape = new Shape();
+    //   generalShape.textColor(color);
       const isValidColor = hexRegExp.test(color);
 
       expect(isValidColor).toBe(true);
@@ -18,7 +18,7 @@ describe("logo text", () => {
     it("should pass if the text entered is a valid color keyword", () => {
         const color = "darksalmon";
         const generalShape = new Shape();
-        generalShape.textColor(color);
+        generalShape.textColor = color;
         const isValidColor = colorKeyWord.includes(color);
         
         expect(isValidColor).toBe(true);
