@@ -4,10 +4,10 @@ const fs = require("fs");
 const path = require("path");
 
 // import shapes
-const Shape = require("../lib/Shape.js");
-const Circle = require("../lib/Circle.js");
-const Square = require("../lib/Square.js");
-const Triangle = require("../lib/Triangle.js");
+const Shape = require("./lib/Shape.js");
+const Circle = require("./lib/circle.js");
+const Square = require("./lib/square.js");
+const Triangle = require("./lib/triangle.js");
 
 /* create regular expression to validate Hex color; color keyword 
 array located at the end of this file */
@@ -73,18 +73,18 @@ function writeSVG() {
         // collect answers in an object
         const logoInput = {
           logoText: response.logoText,
-          textColor: response.textColor,
+          textColor: response.textColor.toLowerCase(),
           logoShape: response.logoShape,
-          shapeColor: response.shapeColor,
+          shapeColor: response.shapeColor.toLowerCase(),
         };
 
         // create a file path where logo.svg files will be saved: examples
-        const filePath = path.join("../examples", "logo.svg");
+        const filePath = path.join("./examples/", "logo.svg");
         
         // construct the svg file 
         // use IF to create diff svg file based on logoShape
         if (logoInput.logoShape = 'circle') {
-            const circleLogo = Circle(
+            const circleLogo = new Circle(
               logoInput.logoText,
               logoInput.textColor,
               logoInput.logoShape,
@@ -94,13 +94,13 @@ function writeSVG() {
 
             fs.writeFile(filePath, logoData, (err) => {
                 if(err) {
-                    console.err(err);
+                    console.error(err);
                 } else {
                     console.log("Generated logo.svg");
                 }
             });
         } else if (logoInput.logoShape = 'square') {
-            const squareLogo = Square(
+            const squareLogo = new Square(
               logoInput.logoText,
               logoInput.textColor,
               logoInput.logoShape,
@@ -110,13 +110,13 @@ function writeSVG() {
 
             fs.writeFile(filePath, logoData, (err) => {
               if (err) {
-                console.err(err);
+                console.error(err);
               } else {
                 console.log("Generated logo.svg");
               }
             });
         } else {
-            const triangleLogo = Triangle(
+            const triangleLogo = new Triangle(
               logoInput.logoText,
               logoInput.textColor,
               logoInput.logoShape,
@@ -126,7 +126,7 @@ function writeSVG() {
 
             fs.writeFile(filePath, logoData, (err) => {
               if (err) {
-                console.err(err);
+                console.error(err);
               } else {
                 console.log("Generated logo.svg");
               }
