@@ -8,10 +8,11 @@ const Shape = require("../lib/Shape.js");
 const Circle = require("../lib/Circle.js");
 const Square = require("../lib/Square.js");
 const Triangle = require("../lib/Triangle.js");
+// const { validate } = require("@babel/types");
 
 /* create regular expression to validate Hex color; color keyword 
 array located at the end of this file */
-const hexRegExp = /^[0-9A-F]{6}$/;
+const hexRegExp = /^#([0-9A-F]{6})$/;
 
 // create an array of questions
 const questions = [
@@ -20,12 +21,28 @@ const questions = [
     message: "Enter the text for your logo (max 3 characters): ",
     name: "logoText",
     // add validation
+    validate: (input) => {
+      if (input.length === 0) {
+        return "Logo must contain text.";
+      }
+      if (input.length > 3) {
+        return "Logo text must be 3 characters or fewer.";
+      }
+      return true;
+    },
   },
   {
     type: "input",
-    message: "Enter the color of your logo text (keyword or 6-digit Hex code): ",
+    message:
+      "Enter the color of your logo text (keyword or #FFFFFF Hex format): ",
     name: "textColor",
     // add validation
+    validate: (input) => {
+      if (!hexRegExp.test(input) && !colorKeyWord.includes(input)) {
+        return "Please enter a valid color keyword or Hex code.";
+      }
+      return true;
+    },
   },
   {
     type: "list",
@@ -35,9 +52,16 @@ const questions = [
   },
   {
     type: "input",
-    message: "Enter the color of your logo shape (keyword or 6-digit Hex code): ",
+    message:
+      "Enter the color of your logo shape (keyword or #FFFFFF Hex format): ",
     name: "shapeColor",
     // add validation
+    validate: (input) => {
+      if (!hexRegExp.test(input) && !colorKeyWord.includes(input)) {
+        return "Please enter a valid color keyword or Hex code.";
+      }
+      return true;
+    },
   },
 ];
 
