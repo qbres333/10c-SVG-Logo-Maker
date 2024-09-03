@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const shapes = require("./shapes");
 
 // create an array of questions
 const questions = [
@@ -63,12 +64,12 @@ function writeSVG() {
             </svg>`;
 
         // triangle created with polygon element
-        // top point 150, 150; bottom left 70,[calulcate]; bottom right 230,[calculate]
+        // top point 150, 150; bottom left 70,138.6; bottom right 230,138.6
         let triangleLogo = `<svg version="1.1" 
             width="300" 
             height="200" 
             xmlns="http://www.w3.org/2000/svg">
-            <polygon x="160" y="160" rx="6" ry="6" width="160" height="160" fill=${logoInput.shapeColor} />
+            <polygon points="150, 20 57.6, 184.8 242.4, 184.8" fill=${logoInput.shapeColor} />
             <text x="150" y="125" font-size="60" text-anchor="middle" fill=${logoInput.textColor}>${logoInput.logoText}</text>
             </svg>`;
             
