@@ -1,8 +1,14 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const shapes = require("../lib/shapes");
-// for file path to save examples (built-in Node module)
+// import path module to save examples later (built-in Node module)
 const path = require("path");
+
+// import shapes
+const Shape = require("../lib/Shape.js");
+const Circle = require("../lib/Circle.js");
+const Square = require("../lib/Square.js");
+const Triangle = require("../lib/Triangle.js");
+
 
 // create an array of questions
 const questions = [
