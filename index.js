@@ -1,6 +1,8 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const shapes = require("./shapes");
+const shapes = require("../lib/shapes");
+// for file path to save examples (built-in Node module)
+const path = require("path");
 
 // create an array of questions
 const questions = [
@@ -44,44 +46,68 @@ function writeSVG() {
             shapeColor: response.shapeColor
         }
 
-        // construct the svg file text
-        //   use IF to create diff svg file based on logoShape
-        let circleLogo = `<svg version="1.1" 
-            width="300" 
-            height="200" 
-            xmlns="http://www.w3.org/2000/svg">
-            <circle cx="150" cy="100" r="80" fill=${logoInput.shapeColor} />
-            <text x="150" y="125" font-size="60" text-anchor="middle" fill=${logoInput.textColor}>${logoInput.logoText}</text>
-            </svg>`;
+        // create a file path where logo.svg files will be saved: examples
+        const filePath = path.join("../examples", "logo.svg");
+        
+        // construct the svg file 
+        // use IF to create diff svg file based on logoShape
+        if (logoInput.logoShape = 'circle') {
+            const circleLogo = Circle(
+              logoInput.logoText,
+              logoInput.textColor,
+              logoInput.logoShape,
+              logoInput.shapeColor
+            );
+            const logoData = circleLogo.printSVG();
 
-        // square logo made from rect element, with rounded corners rx, ry
-        let squareLogo = `<svg version="1.1" 
-            width="300" 
-            height="200" 
-            xmlns="http://www.w3.org/2000/svg">
-            <rect x="160" y="160" rx="6" ry="6" width="160" height="160" fill=${logoInput.shapeColor} />
-            <text x="150" y="125" font-size="60" text-anchor="middle" fill=${logoInput.textColor}>${logoInput.logoText}</text>
-            </svg>`;
+            fs.writeFile(filePath, logoData, (err) => {
+                if(err) {
+                    console.err(err);
+                } else {
+                    console.log("Generated logo.svg");
+                }
+            });
+        } else if (logoInput.logoShape = 'square') {
+            const squareLogo = Square(
+              logoInput.logoText,
+              logoInput.textColor,
+              logoInput.logoShape,
+              logoInput.shapeColor
+            );
+            const logoData = squareLogo.printSVG();
 
-        // triangle created with polygon element
-        // top point 150, 150; bottom left 70,138.6; bottom right 230,138.6
-        let triangleLogo = `<svg version="1.1" 
-            width="300" 
-            height="200" 
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon points="150, 20 57.6, 184.8 242.4, 184.8" fill=${logoInput.shapeColor} />
-            <text x="150" y="125" font-size="60" text-anchor="middle" fill=${logoInput.textColor}>${logoInput.logoText}</text>
-            </svg>`;
-            
+            fs.writeFile(filePath, logoData, (err) => {
+              if (err) {
+                console.err(err);
+              } else {
+                console.log("Generated logo.svg");
+              }
+            });
+        } else {
+            const triangleLogo = Triangle(
+              logoInput.logoText,
+              logoInput.textColor,
+              logoInput.logoShape,
+              logoInput.shapeColor
+            );
+            const logoData = triangleLogo.printSVG();
+
+            fs.writeFile(filePath, logoData, (err) => {
+              if (err) {
+                console.err(err);
+              } else {
+                console.log("Generated logo.svg");
+              }
+            });
+        }
+        
     })
 }
 
-/* for tests: 
-prompt for text: test fails if there are more than 3 characters;
-prompt for text color: test fails if the input is not a color keyword
-    or hex code
-prompt for shape: shape is a list (triangle, circle, square)
-prompt for shape color: test fails if the input is not a color keyword
-    or hex code
- 
-*/
+// function to initialize the app
+function init() {
+    writeSVG();
+}
+
+// function call to initialize app
+init();
