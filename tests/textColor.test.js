@@ -17,8 +17,8 @@ describe("logo text", () => {
   describe("text color", () => {
     it("should pass if the text entered is a valid color keyword", () => {
         const color = "darksalmon";
-        const generalShape = new Shape();
-        generalShape.textColor = color;
+        // const generalShape = new Shape();
+        // generalShape.textColor = color;
         const isValidColor = colorKeyWord.includes(color);
         
         expect(isValidColor).toBe(true);

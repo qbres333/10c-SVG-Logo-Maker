@@ -37,7 +37,7 @@ const questions = [
     name: "textColor",
     // add validation
     validate: (input) => {
-      if (!hexRegExp.test(input) && !colorKeyWord.includes(input)) {
+      if (!hexRegExp.test(input.toLowerCase()) && !colorKeyWord.includes(input.toLowerCase())) {
         return "Please enter a valid color keyword or Hex code.";
       }
       return true;
@@ -56,7 +56,7 @@ const questions = [
     name: "shapeColor",
     // add validation
     validate: (input) => {
-      if (!hexRegExp.test(input) && !colorKeyWord.includes(input)) {
+      if (!hexRegExp.test(input.toLowerCase()) && !colorKeyWord.includes(input.toLowerCase())) {
         return "Please enter a valid color keyword or Hex code.";
       }
       return true;
@@ -77,60 +77,78 @@ function writeSVG() {
           logoShape: response.logoShape,
           shapeColor: response.shapeColor.toLowerCase(),
         };
-
-        // create a file path where logo.svg files will be saved: examples
-        const filePath = path.join("./examples/", "logo.svg");
-        
+        // create timestamp to add to file name for uniqueness
+        const timeCreated = Date.now();
         // construct the svg file 
         // use IF to create diff svg file based on logoShape
         if (logoInput.logoShape = 'circle') {
-            const circleLogo = new Circle(
-              logoInput.logoText,
-              logoInput.textColor,
-              logoInput.logoShape,
-              logoInput.shapeColor
-            );
-            const logoData = circleLogo.printSVG();
+          const circleLogo = new Circle(
+            logoInput.logoText,
+            logoInput.textColor,
+            logoInput.logoShape,
+            logoInput.shapeColor
+          );
+          const logoData = circleLogo.printSVG();
 
-            fs.writeFile(filePath, logoData, (err) => {
-                if(err) {
-                    console.error(err);
-                } else {
-                    console.log("Generated logo.svg");
-                }
-            });
+          // create a file path where logo.svg files will be saved: examples
+          // each file will have a unique name with shape & timestamp
+          const filePath = path.join("./examples/", `circle-logo_${timeCreated}.svg`);
+
+          fs.writeFile(filePath, logoData, (err) => {
+            if (err) {
+              console.error(err);
+            } else {
+              console.log("Generated logo.svg");
+            }
+          });
         } else if (logoInput.logoShape = 'square') {
-            const squareLogo = new Square(
-              logoInput.logoText,
-              logoInput.textColor,
-              logoInput.logoShape,
-              logoInput.shapeColor
-            );
-            const logoData = squareLogo.printSVG();
+          const squareLogo = new Square(
+            logoInput.logoText,
+            logoInput.textColor,
+            logoInput.logoShape,
+            logoInput.shapeColor
+          );
+          const logoData = squareLogo.printSVG();
 
-            fs.writeFile(filePath, logoData, (err) => {
-              if (err) {
-                console.error(err);
-              } else {
-                console.log("Generated logo.svg");
-              }
-            });
+          // create a file path where logo.svg files will be saved: examples
+          // each file will have a unique name with shape & timestamp
+          
+          const filePath = path.join(
+            "./examples/",
+            `square-logo_${timeCreated}.svg`
+          );
+
+          fs.writeFile(filePath, logoData, (err) => {
+            if (err) {
+              console.error(err);
+            } else {
+              console.log("Generated logo.svg");
+            }
+          });
         } else {
-            const triangleLogo = new Triangle(
-              logoInput.logoText,
-              logoInput.textColor,
-              logoInput.logoShape,
-              logoInput.shapeColor
-            );
-            const logoData = triangleLogo.printSVG();
+          const triangleLogo = new Triangle(
+            logoInput.logoText,
+            logoInput.textColor,
+            logoInput.logoShape,
+            logoInput.shapeColor
+          );
+          const logoData = triangleLogo.printSVG();
 
-            fs.writeFile(filePath, logoData, (err) => {
-              if (err) {
-                console.error(err);
-              } else {
-                console.log("Generated logo.svg");
-              }
-            });
+          // create a file path where logo.svg files will be saved: examples
+          // each file will have a unique name with shape & timestamp
+     
+          const filePath = path.join(
+            "./examples/",
+            `triangle-logo_${timeCreated}.svg`
+          );
+
+          fs.writeFile(filePath, logoData, (err) => {
+            if (err) {
+              console.error(err);
+            } else {
+              console.log("Generated logo.svg");
+            }
+          });
         }
         
     })
