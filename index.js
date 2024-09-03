@@ -8,11 +8,10 @@ const Shape = require("../lib/Shape.js");
 const Circle = require("../lib/Circle.js");
 const Square = require("../lib/Square.js");
 const Triangle = require("../lib/Triangle.js");
-// const { validate } = require("@babel/types");
 
 /* create regular expression to validate Hex color; color keyword 
 array located at the end of this file */
-const hexRegExp = /^#([0-9A-F]{6})$/;
+const hexRegExp = /^#([0-9a-fA-F]{6})$/;
 
 // create an array of questions
 const questions = [
@@ -74,9 +73,9 @@ function writeSVG() {
         // collect answers in an object
         const logoInput = {
           logoText: response.logoText,
-          textColor: response.textColor.toLowerCase(),
+          textColor: response.textColor,
           logoShape: response.logoShape,
-          shapeColor: response.shapeColor.toLowerCase(),
+          shapeColor: response.shapeColor,
         };
 
         // create a file path where logo.svg files will be saved: examples
