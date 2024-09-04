@@ -16,7 +16,7 @@ https://github.com/qbres333/10c-SVG-Logo-Maker
 
 ## Features
 
-User can enter logo criteria like the logo text, text color, logo shape, and shape color into the terminal using the instructions presented. Colors can be entered as either 6-digit hexadecimal code or as extended color keywords. The SVG file will generate with the shape name and Unix timestamp in the title when they have answered all questions in the terminal, and the file will be saved to the "examples" folder in the directory.
+User can enter logo criteria like the logo text, text color, logo shape, and shape color into the terminal using the instructions presented. Colors can be entered as either 6-digit hexadecimal code or as basic/extended color keywords. The SVG file will generate with the shape name and Unix timestamp in the title when they have answered all questions in the terminal, and the file will be saved to the "examples" folder in the directory.
 
 ## Usage
 
@@ -25,6 +25,8 @@ This app streamlines the logo creation process, saving time and effort while ens
 ![app preview](Assets/logo_preview.png)
 
 ## Credits
+Input Validation:
+https://github.com/SBoudrias/Inquirer.js/blob/main/packages/input/README.md
 
 Basic & Extended Color Keywords:
 https://www.w3.org/TR/css-color-3/#numerical
