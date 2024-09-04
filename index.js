@@ -81,7 +81,7 @@ function writeSVG() {
         const timeCreated = Date.now();
         // construct the svg file 
         // use IF to create diff svg file based on logoShape
-        if (logoInput.logoShape = 'circle') {
+        if (logoInput.logoShape == 'circle') {
           const circleLogo = new Circle(
             logoInput.logoText,
             logoInput.textColor,
@@ -101,7 +101,7 @@ function writeSVG() {
               console.log("Generated logo.svg");
             }
           });
-        } else if (logoInput.logoShape = 'square') {
+        } else if (logoInput.logoShape == 'square') {
           const squareLogo = new Square(
             logoInput.logoText,
             logoInput.textColor,
